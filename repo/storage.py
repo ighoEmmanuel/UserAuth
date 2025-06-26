@@ -1,4 +1,6 @@
 import os
+
+import certifi
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from flask import Flask
@@ -8,6 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.getenv("MONGO_URL")
+app.config["MONGO_TLS_CA_FILE"] = certifi.where()
 mongo = PyMongo(app)
 
 class Storage:
