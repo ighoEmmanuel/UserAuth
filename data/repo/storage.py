@@ -49,10 +49,10 @@ class Storage:
 
 
     def exist_by_id(self, user_id: str) -> bool:
-        return self.db.users.find_one({"_id": user_id})
+        return self.db.users.find_one({"_id": ObjectId(user_id)})
 
     def find_user_by_id(self, user_id):
-        user_data = self.db.users.find_one({"_id": user_id})
+        user_data = self.db.users.find_one({"_id": ObjectId(user_id)})
         if user_data is None:
             return None
         return User(

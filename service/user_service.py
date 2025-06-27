@@ -9,7 +9,9 @@ from service.blog_service import BlogService
 
 
 def _is_valid_email(email):
-    return re.match(r"[^@]+@[^@]+\.[^@]+", email)
+    if not isinstance(email, str):
+        return False
+    return re.match(r"[^@]+@[^@]+\.[^@]+", email) is not None
 
 
 
@@ -56,10 +58,13 @@ class UserService:
 
     def add_post(self, post:Blog):
         user_id = post.author_id
+        print(user_id)
         if self.storage.exist_by_id(user_id):
             blog_id = self.blog_service.add_blog(post)
             user = self.storage.find_user_by_id(user_id)
             user.blogs.append(blog_id)
             self.storage.update_user(user)
             return {"message": "Post added successfully"}, 200
-        return {"error": "User Id  not  found"},404
+        else:
+            print(self.storage.exist_by_id(user_id))
+            return {"error": "User Id  not  found"},404

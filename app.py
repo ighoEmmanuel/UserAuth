@@ -17,7 +17,7 @@ def register():
 
     user = User(name=name, email=email, password=password)
     register_service = user_service.register(user)
-    return register_service.register()
+    return register_service
 
 
 
@@ -32,7 +32,7 @@ def sign_in():
 @app.route('/addPost',methods=['POST'])
 def add_post():
     data = request.get_json()
-    user_id = data.get('user_id')
+    user_id = data.get('author_id')
     title = data.get('title')
     content = data.get('content')
     post = Blog(user_id, title, content)
