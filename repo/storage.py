@@ -8,7 +8,7 @@ from model.user import User
 load_dotenv()
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = os.getenv("MONGO_URL")
+app.config["MONGO_URI"] = os.getenv("MONGO_URL").strip()
 mongo = PyMongo(app)
 
 class Storage:
