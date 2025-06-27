@@ -1,10 +1,10 @@
 import re
 
-from model.user import User
-from repo.storage import Storage
+from data.model.user import User
+from data.repo.storage import Storage
 
 from security.jwt_utils import generate_token
-from service import password_hasher_and_checker
+from service.authService import password_hasher_and_checker
 
 
 def _is_valid_email(email):

@@ -1,8 +1,8 @@
 from flask import Flask, request
 
-from model.user import User
-from service.login import Login
-from service.register import RegisterService
+from data.model.user import User
+from service.authService.login import Login
+from service.authService.register import RegisterService
 
 app = Flask(__name__)
 

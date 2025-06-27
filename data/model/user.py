@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional, List
 
-from model.blog import Blog
+from bson import ObjectId
 
 
 @dataclass
@@ -9,7 +9,7 @@ class User:
     name: str
     email: str
     password: str
-    blogs: List[str] = field(default_factory=list)
+    blogs: List[ObjectId] = field(default_factory=list)
     id: Optional[str] = field(default=None, repr=False)
 
 

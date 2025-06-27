@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from flask import Flask
-from model.user import User
+from data.model.user import User
 
 load_dotenv()
 

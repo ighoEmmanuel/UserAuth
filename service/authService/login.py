@@ -1,5 +1,5 @@
-from repo.storage import Storage
-from service import password_hasher_and_checker
+from data.repo.storage import Storage
+from service.authService import password_hasher_and_checker
 from security.jwt_utils import generate_token
 
 class Login:
