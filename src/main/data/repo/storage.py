@@ -4,7 +4,7 @@ from bson import ObjectId
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from flask import Flask
-from data.model.user import User
+from src.main.data.model.user import User
 
 load_dotenv()
 

@@ -1,11 +1,11 @@
 import re
 
-from data.model.blog import Blog
-from data.model.user import User
-from data.repo.storage import Storage
-from security.jwt_utils import generate_token
-from security import password_hasher_and_checker
-from service.blog_service import BlogService
+from src.main.data.model.blog import Blog
+from src.main.data.model.user import User
+from src.main.data.repo.storage import Storage
+from src.main.security.jwt_utils import generate_token
+from src.main.security import password_hasher_and_checker
+from src.main.service.blog_service import BlogService
 
 
 def _is_valid_email(email):
@@ -68,3 +68,5 @@ class UserService:
         else:
             print(self.storage.exist_by_id(user_id))
             return {"error": "User Id  not  found"},404
+
+

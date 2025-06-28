@@ -1,8 +1,8 @@
 from flask import Flask, request
 
-from data.model.blog import Blog
-from data.model.user import User
-from service.user_service import UserService
+from src.main.data.model.blog import Blog
+from src.main.data.model.user import User
+from src.main.service.user_service import UserService
 
 app = Flask(__name__)
 

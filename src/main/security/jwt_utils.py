@@ -3,7 +3,7 @@ import jwt
 import datetime
 from dotenv import load_dotenv
 
-from data.model.user import User
+from src.main.data.model.user import User
 
 load_dotenv()
 SECRET_KEY = os.getenv("JWT_SECRET")

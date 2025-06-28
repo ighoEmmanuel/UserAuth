@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_pymongo import PyMongo
 
-from data.model.blog import Blog
+from src.main.data.model.blog import Blog
 
 
 app = Flask(__name__)

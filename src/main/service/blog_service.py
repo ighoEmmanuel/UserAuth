@@ -1,5 +1,5 @@
-from data.model.blog import Blog
-from data.repo.blog_storage import BlogStorage
+from src.main.data.model.blog import Blog
+from src.main.data.repo.blog_storage import BlogStorage
 
 
 class BlogService:
@@ -21,4 +21,9 @@ class BlogService:
         if self.storage.exist_by_blog_id(blog_id):
             self.storage.delete_blog(blog_id)
             return {"message":"Blog deleted successfully"},200
+        return {"error":"Blog not found"},404
+
+    def find_blog(self, blog_id):
+        if self.storage.exist_by_blog_id(blog_id):
+            return self.storage.find_blog_by_id(blog_id)
         return {"error":"Blog not found"},404
