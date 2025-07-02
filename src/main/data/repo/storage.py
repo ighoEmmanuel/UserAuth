@@ -28,7 +28,8 @@ class Storage:
                 id=str(user_data["_id"]),
                 name=user_data["name"],
                 password=user_data["password"],
-                email=user_data["email"]
+                email=user_data["email"],
+                blogs = user_data["blogs"]
         )
 
 
@@ -41,7 +42,8 @@ class Storage:
             id=str(user_data["_id"]),
             name=user_data["name"],
             password=user_data["password"],
-            email=user_data["email"]
+            email=user_data["email"],
+            blogs=user_data["blogs"]
         )
 
     def exists_by_email(self, email: str) -> bool:
@@ -59,11 +61,14 @@ class Storage:
             id=str(user_data["_id"]),
             name=user_data["name"],
             password=user_data["password"],
-            email=user_data["email"]
+            email=user_data["email"],
+            blogs = user_data["blogs"]
         )
 
     def update_user(self, user: User):
         self.db.users.update_one(
             {"_id": ObjectId(user.id)},
-            {"$set": user.to_dict()}
+            {"$set": user.to_dict(include_id=False)}
         )
+
+

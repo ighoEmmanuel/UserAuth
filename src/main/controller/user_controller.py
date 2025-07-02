@@ -1,14 +1,14 @@
-from flask import Flask, request
+from flask import Blueprint, request
 
 from src.main.data.model.blog import Blog
 from src.main.data.model.user import User
 from src.main.service.user_service import UserService
 
-app = Flask(__name__)
+user_controller = Blueprint('user_controller', __name__)
 
 user_service = UserService()
 
-@app.route('/register', methods=['POST'])
+@user_controller.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
     name = data.get('name')
@@ -21,7 +21,7 @@ def register():
 
 
 
-@app.route('/login',methods=['POST'])
+@user_controller.route('/login',methods=['POST'])
 def sign_in():
     data = request.get_json()
     email = data.get('email')
@@ -29,7 +29,7 @@ def sign_in():
     return user_service.login(email,password)
 
 
-@app.route('/addPost',methods=['POST'])
+@user_controller.route('/addPost',methods=['POST'])
 def add_post():
     data = request.get_json()
     user_id = data.get('author_id')
@@ -38,6 +38,8 @@ def add_post():
     post = Blog(user_id, title, content)
     return user_service.add_post(post)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@user_controller.route('/deletePost',methods=['PUT'])
+def delete_post():
+    data = request.get_json()
+    blog_id = data.get('blog_id')
+    return user_service.delete_post(blog_id)

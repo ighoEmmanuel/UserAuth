@@ -9,15 +9,17 @@ class User:
     name: str
     email: str
     password: str
-    blogs: List[ObjectId] = field(default_factory=list)
+    blogs: List[str] = field(default_factory=list)
     id: Optional[str] = field(default=None, repr=False)
 
-
-    def to_dict(self):
-        return {
+    def to_dict(self, include_id=True):
+        data = {
             "name": self.name,
             "email": self.email,
             "password": self.password,
-            "blogs": self.blogs,
+            "blogs": self.blogs
         }
+        if include_id and self.id:
+            data["_id"] = ObjectId(self.id)
+        return data
 

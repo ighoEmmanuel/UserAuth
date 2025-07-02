@@ -1,6 +1,6 @@
 import os
 import jwt
-import datetime
+from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 from src.main.data.model.user import User
@@ -13,7 +13,10 @@ def generate_token(user: User) -> str:
     payload = {
         "user_id": user.id,
         "name": user.name,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+        "email": user.email,
+        "blogs" : user.blogs,
+        "exp": (datetime.now(timezone.utc) + timedelta(hours=24)).timestamp()
+
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return token.decode("utf-8") if isinstance(token, bytes) else token

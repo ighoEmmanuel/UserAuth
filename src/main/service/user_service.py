@@ -58,15 +58,36 @@ class UserService:
 
     def add_post(self, post:Blog):
         user_id = post.author_id
-        print(user_id)
         if self.storage.exist_by_id(user_id):
-            blog_id = self.blog_service.add_blog(post)
+            result  = self.blog_service.add_blog(post)
             user = self.storage.find_user_by_id(user_id)
-            user.blogs.append(blog_id)
+            user.blogs.append(str(result['blog_id']))
             self.storage.update_user(user)
-            return {"message": "Post added successfully"}, 200
-        else:
-            print(self.storage.exist_by_id(user_id))
-            return {"error": "User Id  not  found"},404
+            return result
+
+        return {"error": "User Id  not  found"},404
+
+    def delete_post(self, blog_id: str):
+        blog, status = self.blog_service.find_blog(blog_id)
+        if status != 200:
+            return blog, status
+
+        user_id = blog["author_id"]
+        self.blog_service.delete_blog(blog_id)
+        user = self.storage.find_user_by_id(user_id)
+        user.blogs.remove(blog_id)
+        self.storage.update_user(user)
+        return {"message": "Post deleted successfully"}, 200
+
+    def get_user_blogs(self, user_id):
+        user = self.storage.find_user_by_id(user_id)
+        if user is None:
+            return{"error": "User not found"}, 404
+        return user.blogs
+
+
+
+
+
 
 

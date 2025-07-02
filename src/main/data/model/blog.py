@@ -8,11 +8,10 @@ class Blog:
     content: str
     id: Optional[str] = field(default=None, repr=False)
 
-    def to_dict(self):
+    def to_dict(self, include_id=True) :
         return {
             'author_id': self.author_id,
             'title': self.title,
-            'id': self.id,
             'content': self.content,
         }
 
